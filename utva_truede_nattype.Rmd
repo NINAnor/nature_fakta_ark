@@ -1,0 +1,34 @@
+---
+title: "Utvalgte og truede naturtyper»"
+author: "D.Barton"
+date: "2025-01-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Enkel forklaring
+Før en utbygging skal utbygger gjøre en konsekvensvurdering for ulike naturtyper.  Miljødirektoratet har samlet de viktigste naturtypene i et kart for å gjør det enklere å konsekvensvurdere.  Likevel viste NRK saken Norge i Rødt Hvitt og Grått at vi fortsatt bygger på truet natur og natur som er sentrale levesteder for truede arter. Eksempler på en truet naturtype er slåtteeng, kystgranskog, grisehalekorallbunn og kalksjø .  Nesten halvparten av alle truede arter har sitt leveområde helt eller delvis i skog. 
+
+![Slåtteng er en truer naturtype. Foto: L.D. Sterten](layer_pictures/utv_trued_nattype.png)
+
+# Litt mer vitenskapelig forklart
+«Naturtyper av forvaltningsinteresse» er et samlebegrep om naturtyper som tillegges vekt av forvaltningen ved behandling av konsekvensutredninger (KU). Det er naturtyper som selv er truet eller utvalgt fordi de er leveområder for truede arter.   I NRK saken ble det kalt også «utvalgte eller rødlistede naturtyper».   Rødlister er laget for arter og naturtyper som er truet i Norge. Dette består av en rekke naturtyper som er spesielt viktige av ulike grunner:
+
+* naturtyper som Miljødirektoratet har valgt ut for kartlegging fordi de enten er truet eller nær truet
+* naturtyper som er antatt å være spesielt viktig i biologisk mangfold fra eldre kartlegginger 
+* naturtyper som dekker sentrale økosystemfunksjoner, for eksempel fordi de er levesteder for truede og nær truede arter 
+* naturtyper som er spesielt dårlig kartlagt 
+
+# Vil du vite mer?
+* NRK saken Norge i Rødt Hvitt og Grått inkluderte [utvalgte og truede naturtyper.](https://www.nrk.no/dokumentar/xl/nrk-avslorer_-44.000-inngrep-i-norsk-natur-pa-fem-ar-1.16573560)
+* [Rødlistede naturtyper på Artsdatabanken](https://www.artsdatabanken.no/rodlistefornaturtyper )
+* [Rødlistede arter på Artsdatabanken.](https://artsdatabanken.no/lister/rodlisteforarter/2021/)
+
+# Kart
+Du kan selv se på kart over naturtyper av forvaltningsinteresse på [Naturbase kart](https://geocortex02.miljodirektoratet.no/vertigisstudio/web/?app=a3a09afee5c24c459c53a9a9ff0915f1).  
+Velg kartlag «Naturtyper, naturmangfold» og klikk «Naturtyper – KU-verdi»
+
+

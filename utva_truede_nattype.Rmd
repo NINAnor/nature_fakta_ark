@@ -1,13 +1,26 @@
 ---
 title: "Utvalgte og truede naturtyper»"
-author: "D.Barton"
-date: "2025-01-19"
-output: html_document
+
+output: 
+  html_document:
+    css: styles.css
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: flatly  # Themes: flatly, lumen, spacelab, etc.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(htmlwidgets)
+library(leaflet)
+library(leaflet.extras)
 ```
+Publisert av: [David Barton - NINA](mailto:david.barton@nina.no).
+
+_Last updated on `r format(Sys.Date(), '%B %d, %Y')`._
 
 # Enkel forklaring
 Før en utbygging skal utbygger gjøre en konsekvensvurdering for ulike naturtyper.  Miljødirektoratet har samlet de viktigste naturtypene i et kart for å gjør det enklere å konsekvensvurdere.  Likevel viste NRK saken Norge i Rødt Hvitt og Grått at vi fortsatt bygger på truet natur og natur som er sentrale levesteder for truede arter. Eksempler på en truet naturtype er slåtteeng, kystgranskog, grisehalekorallbunn og kalksjø .  Nesten halvparten av alle truede arter har sitt leveområde helt eller delvis i skog. 
@@ -17,10 +30,10 @@ Før en utbygging skal utbygger gjøre en konsekvensvurdering for ulike naturtyp
 # Litt mer vitenskapelig forklart
 «Naturtyper av forvaltningsinteresse» er et samlebegrep om naturtyper som tillegges vekt av forvaltningen ved behandling av konsekvensutredninger (KU). Det er naturtyper som selv er truet eller utvalgt fordi de er leveområder for truede arter.   I NRK saken ble det kalt også «utvalgte eller rødlistede naturtyper».   Rødlister er laget for arter og naturtyper som er truet i Norge. Dette består av en rekke naturtyper som er spesielt viktige av ulike grunner:
 
-* naturtyper som Miljødirektoratet har valgt ut for kartlegging fordi de enten er truet eller nær truet
-* naturtyper som er antatt å være spesielt viktig i biologisk mangfold fra eldre kartlegginger 
-* naturtyper som dekker sentrale økosystemfunksjoner, for eksempel fordi de er levesteder for truede og nær truede arter 
-* naturtyper som er spesielt dårlig kartlagt 
+* Naturtyper som Miljødirektoratet har valgt ut for kartlegging fordi de enten er truet eller nær truet
+* Naturtyper som er antatt å være spesielt viktig i biologisk mangfold fra eldre kartlegginger 
+* Naturtyper som dekker sentrale økosystemfunksjoner, for eksempel fordi de er levesteder for truede og nær truede arter 
+* Naturtyper som er spesielt dårlig kartlagt 
 
 # Vil du vite mer?
 * NRK saken Norge i Rødt Hvitt og Grått inkluderte [utvalgte og truede naturtyper.](https://www.nrk.no/dokumentar/xl/nrk-avslorer_-44.000-inngrep-i-norsk-natur-pa-fem-ar-1.16573560)
@@ -30,5 +43,37 @@ Før en utbygging skal utbygger gjøre en konsekvensvurdering for ulike naturtyp
 # Kart
 Du kan selv se på kart over naturtyper av forvaltningsinteresse på [Naturbase kart](https://geocortex02.miljodirektoratet.no/vertigisstudio/web/?app=a3a09afee5c24c459c53a9a9ff0915f1).  
 Velg kartlag «Naturtyper, naturmangfold» og klikk «Naturtyper – KU-verdi »
+```{r, include=T, echo=FALSE}
+# Define WMS parameters
+wms_url <- "https://kart.miljodirektoratet.no/arcgis/services/friluftsliv_kartlagt/mapserver/WMSServer"
+layer_name <- "friluftsliv_kartlagt_verdi"
+legend_url <- "https://kart.miljodirektoratet.no/arcgis/services/friluftsliv_kartlagt/MapServer/WmsServer?request=GetLegendGraphic&version=1.3.0&format=image/png&layer=friluftsliv_kartlagt_verdi"
+
+# Create the map
+leaflet() %>%
+  addTiles(group = "Base Map") %>%  # Default OpenStreetMap basemap
+  addWMSTiles(
+    baseUrl = wms_url,
+    layers = layer_name,  
+    options = WMSTileOptions(
+      format = "image/png",
+      transparent = TRUE
+    ),
+    attribution = "© Miljødirektoratet, Geonorge",
+    group = "Friluftsliv Kartlagt"  # Group for Layer Control
+  ) %>%
+  setView(lng = 10.7522, lat = 59.9139, zoom = 8) %>%
+  
+  # Add a layer control to toggle the WMS layer
+  addLayersControl(
+    baseGroups = c("Base Map"),
+    overlayGroups = c("Friluftsliv Kartlagt"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  
+  # Add the legend manually
+  addControl(html = paste0("<img src='", legend_url, "' style='width:150px;'>"), 
+             position = "bottomright")
+```
 
 

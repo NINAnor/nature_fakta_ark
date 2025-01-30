@@ -29,6 +29,6 @@ Før en utbygging skal utbygger gjøre en konsekvensvurdering for ulike naturtyp
 
 # Kart
 Du kan selv se på kart over naturtyper av forvaltningsinteresse på [Naturbase kart](https://geocortex02.miljodirektoratet.no/vertigisstudio/web/?app=a3a09afee5c24c459c53a9a9ff0915f1).  
-Velg kartlag «Naturtyper, naturmangfold» og klikk «Naturtyper – KU-verdi»
+Velg kartlag «Naturtyper, naturmangfold» og klikk «Naturtyper – KU-verdi »
 
 

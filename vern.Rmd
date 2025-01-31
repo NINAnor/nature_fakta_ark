@@ -1,0 +1,74 @@
+---
+title: "Naturvernområder"
+
+output: 
+  html_document:
+    css: styles.css
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: flatly  # Themes: flatly, lumen, spacelab, etc.
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(htmlwidgets)
+library(leaflet)
+library(leaflet.extras)
+```
+Publisert av: [Reto Spielhofer - NINA](mailto:reto.spielhofer@nina.no).
+
+_Last updated on `r format(Sys.Date(), '%B %d, %Y')`._
+
+# Enkel forklaring
+
+
+![Foto: Svein-Håkon Lorentsen, 2007](layer_pictures/vern.jpg)
+
+# Litt mer vitenskapelig forklart
+
+
+# Vil du vite mer?
+
+
+
+# Kart
+Se Norges vernområder 
+[Last ned data](https://kartkatalog.geonorge.no/metadata/naturvernomraader/5857ec0a-8d2c-4cd8-baa2-0dc54ae213b4)
+```{r, include=T, echo=FALSE}
+# Define WMS parameters
+
+wms_url <- "https://kart.miljodirektoratet.no/arcgis/services/vern/mapserver/WMSServer"
+layer_name <- "naturvern_klasser_omrade"
+legend_url <- "https://kart.miljodirektoratet.no/arcgis/services/vern/MapServer/WmsServer?request=GetLegendGraphic&version=1.3.0&format=image/png&layer=naturvern_klasser_omrade"
+
+# Create the map
+leaflet() %>%
+  addTiles(group = "Base Map") %>%  # Default OpenStreetMap basemap
+  addWMSTiles(
+    baseUrl = wms_url,
+    layers = layer_name,  
+    options = WMSTileOptions(
+      format = "image/png",
+      transparent = TRUE
+    ),
+    attribution = "© Miljødirektoratet, Arcgis",
+    group = "Vernområder"  # Group for Layer Control
+  ) %>%
+  setView(lng = 10.6322, lat = 60.2139, zoom = 6) %>%
+  
+  # Add a layer control to toggle the WMS layer
+  addLayersControl(
+    baseGroups = c("Base Map"),
+    overlayGroups = c("Vernområder"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  
+  # Add the legend manually
+  addControl(html = paste0("<img src='", legend_url, "' style='width:150px;'>"), 
+             position = "bottomright")
+```
+
+

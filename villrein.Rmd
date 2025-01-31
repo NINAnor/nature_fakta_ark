@@ -1,0 +1,75 @@
+---
+title: "Villreinområder"
+
+output: 
+  html_document:
+    css: styles.css
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: flatly  # Themes: flatly, lumen, spacelab, etc.
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(kableExtra)
+library(htmlwidgets)
+library(leaflet)
+library(leaflet.extras)
+```
+Publisert av: [Reto Spielhofer - NINA](mailto:reto.spielhofer@nina.no).
+
+_Last updated on `r format(Sys.Date(), '%B %d, %Y')`._
+
+# Enkel forklaring
+Villrein er et Norsk symbol for landets unike dyreliv og natur og villrein fordelte seg opprinnelig over hele landet. Da kunne villrein vandre fritt og brukte ulike sesongbeiter. Klimaendring og menneskelig aktivitet, som friluftsliv og utbygging satt villreins leveområder under stor press. For å ta vare på reinen og sikre sitt leveareal, forvaltning definerte villreinområder. De omtrent 20’000 villrein lever i de 24 nasjonale områder som befinner seg i Sør-Norge og villrein forflytter seg ikke i stor grad mellom disse områdene. Med regulert villreinjakt reguleres bestanden i de områder og ta vare på villreins leveområder. 
+
+![Foto: John D.C. Linell, 2009](layer_pictures/villrein.jpg)
+
+# Litt mer vitenskapelig forklart
+Villreinområder definerer 24 områder som forvaltes av forvaltningsenheter. Inndelingen er basert på biofysisk forutsetninger som topografi, arealdekke og klimaforutsettinger, infrastruktur mønster og forvaltningsenheter. Fra de 24 villreinområder er ti nasjonale områder og de er inndelt i to europeiske [villreinregioner](https://villrein.no/villreinomrader/).  Forvaltning av villreinområder inneholder regulere og opprettholde bestanden og genetisk mangfold gjennom villreinjakt, gjennomføre overvåking av villrein bestand og kvalitet. Fylker og kommuner er ansvarlig for å hindre tap på villreinområder gjennom arealplanlegging med bruk av plan- og bygningsloven.
+
+# Vil du vite mer?
+* [Villreinområder](https://villrein.no/villreinomrader/)
+* [Villrein Norge](https://www.miljodirektoratet.no/ansvarsomrader/arter-naturtyper/vilt/villrein/)
+
+
+# Kart
+Se Norges villreinområder 
+[Last ned data](https://kartkatalog.geonorge.no/metadata/villreinomraader/fc59e9a4-59df-4eb3-978a-1c173b84bf4e?search=villrein)
+```{r, include=T, echo=FALSE}
+# Define WMS parameters
+
+wms_url <- "https://kart.miljodirektoratet.no/arcgis/services/villrein/mapserver/WMSServer"
+layer_name <- "villrein_leveomrade"
+legend_url <- "https://kart.miljodirektoratet.no/arcgis/services/villrein/MapServer/WmsServer?request=GetLegendGraphic&version=1.3.0&format=image/png&layer=villrein_leveomrade"
+
+# Create the map
+leaflet() %>%
+  addTiles(group = "Base Map") %>%  # Default OpenStreetMap basemap
+  addWMSTiles(
+    baseUrl = wms_url,
+    layers = layer_name,  
+    options = WMSTileOptions(
+      format = "image/png",
+      transparent = TRUE
+    ),
+    attribution = "© Miljødirektoratet, Arcgis",
+    group = "Villrein"  # Group for Layer Control
+  ) %>%
+  setView(lng = 10.6322, lat = 60.2139, zoom = 6) %>%
+  
+  # Add a layer control to toggle the WMS layer
+  addLayersControl(
+    baseGroups = c("Base Map"),
+    overlayGroups = c("Friluftsliv Kartlagt"),
+    options = layersControlOptions(collapsed = FALSE)
+  ) %>%
+  
+  # Add the legend manually
+  addControl(html = paste0("<img src='", legend_url, "' style='width:150px;'>"), 
+             position = "bottomright")
+```
+
+

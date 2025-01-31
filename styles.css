@@ -1,0 +1,41 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 20px;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #0073b7;
+}
+
+pre, code {
+    background-color: #272822;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #0073b7;
+    color: white;
+}
+
+blockquote {
+    font-style: italic;
+    color: #666;
+    padding-left: 15px;
+    border-left: 4px solid #0073b7;
+}
